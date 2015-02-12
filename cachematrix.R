@@ -47,6 +47,8 @@
 ##
 ## Note! In setinversed function, the solvedData parameter is accepted only if
 ## it's a matrix and it has same row and column count than stored x
+## as the setinversed can be called outside from cacheSolve as well
+##
 #########################################################################
 makeCacheMatrix <- function(x = matrix()) 
 {
@@ -93,6 +95,7 @@ makeCacheMatrix <- function(x = matrix())
 ##
 ## Note! This function assumes that x is invertible
 ## and matrix is square (count of columns is same as count of rows)
+##
 #########################################################################
 cacheSolve <- function(x, ...) 
 {        
