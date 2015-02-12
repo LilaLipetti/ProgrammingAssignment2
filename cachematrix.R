@@ -45,12 +45,15 @@
 ## Note! In set function the cached inversion is cleared only 
 ## if the new matrix y isn't identical with existing matrix x
 #########################################################################
-makeCacheMatrix <- function(x = matrix()) {
+makeCacheMatrix <- function(x = matrix()) 
+{
         
         cachedInversion <- NULL
         
-        set <- function(y) {
-                if (!identical(x,y)) {
+        set <- function(y) 
+        {
+                if (!identical(x,y)) 
+                {
                         x <<- y
                         cachedInversion <<- NULL
                 }
@@ -77,19 +80,24 @@ makeCacheMatrix <- function(x = matrix()) {
 ## Note! This function assumes that x is invertible
 ## and matrix is square (count of columns is same as count of rows)
 #########################################################################
-cacheSolve <- function(x, ...) {        
+cacheSolve <- function(x, ...) 
+{        
 
         ## check that x is actual correct data type ie. list      
         ## and the list contains correct functions
-        if (is.list(x)) {
-                if (identical(names(x),c("set","get","setinversed","getinversed"))){
+        if (is.list(x)) 
+        {
+                if (identical(names(x),c("set","get","setinversed","getinversed")))
+                {
                         ## first we get the data out of x
                         ## if it contains the inversed matrix, return it        
-                        solved <- x$getinversed()
-                        if(!is.null(solved)) {
+                        solved <- x$getinversed()                       
+                        if(!is.null(solved)) 
+                        {
                                 message("getting the already inversed matrix")
                                 return(solved)
                         }
+                
                         
                         ## if the inverted matrix isn't calculated, we calculate it
                         ## and store it into the x
