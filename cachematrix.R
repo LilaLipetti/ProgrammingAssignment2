@@ -44,6 +44,9 @@
 ##
 ## Note! In set function the cached inversion is cleared only 
 ## if the new matrix y isn't identical with existing matrix x
+##
+## Note! In setinversed function, the solvedData parameter is accepted only if
+## it's a matrix and it has same row and column count than stored x
 #########################################################################
 makeCacheMatrix <- function(x = matrix()) 
 {
@@ -62,7 +65,18 @@ makeCacheMatrix <- function(x = matrix())
         
         get <- function() x
         
-        setinversed <- function(solvedData) cachedInversion <<- solvedData
+        setinversed <- function(solvedData) 
+        {
+                if (is.matrix(solvedData))
+                {
+                        if (identical(dim(x), dim(solvedData)))                
+                        {
+                                cachedInversion <<- solvedData
+                        }
+                        else stop("matrix dimensions doesn't match")
+                }
+                else stop("given parameter isn't matrix")
+        }
         
         getinversed<- function() cachedInversion
         
